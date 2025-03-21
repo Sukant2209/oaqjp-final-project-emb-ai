@@ -3,6 +3,7 @@ This module returns Emotion Detetction response using the standard
 Watson NLP library
 '''
 
+import json
 import requests
 
 def emotion_detector(text_to_analyse):
@@ -21,4 +22,10 @@ def emotion_detector(text_to_analyse):
 
     response = requests.post(url, headers= headers, json = json_obj, timeout = 5)
 
-    return response.text
+    json_resp = json.loads(response.text)
+    
+    emotion_resp = json_resp["emotionPredictions"][0]["emotion"]
+
+    emotion_resp['dominant_emotion'] = max(emotion_resp, key = emotion_resp.get)
+
+    return emotion_resp
