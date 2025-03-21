@@ -15,7 +15,7 @@ def emotion_detect():
     resp = emotion_detector(text_to_analyze)
 
     if resp.get('dominant_emotion') is None:
-        return f"<b>Invalid text! Please try again!</b>"
+        return "<b>Invalid text! Please try again!</b>"
 
     return f'''For the given statement, the system response is 'anger': {resp.get('anger')},
     'disgust': {resp.get('disgust')}, 'fear': {resp.get('fear')}, 'joy': {resp.get('joy')}
